@@ -24,17 +24,11 @@ safely) and the **MCP server configuration** (connection to your instance) in on
 - **`/reload-plugins` is required** after installing — it activates the skill and connects
   the MCP server without restarting the session (or restart Claude Code instead).
 
-For local development/testing you can also load the plugin directly:
-```
-claude --plugin-dir /path/to/higson
-```
-(Note: `--plugin-dir` does not prompt for config — it uses defaults. Use marketplace install to be prompted for the token.)
-
 On enable, Claude Code **prompts you for two values**:
 
 | Field | What to enter |
 |-------|---------------|
-| **Higson Studio MCP URL** | e.g. `http://localhost:8282/api/mcp` or `https://your-instance/api/mcp` |
+| **Higson Studio MCP URL** | e.g. `https://your-instance/api/mcp` (or `http://localhost:8282/api/mcp` for a local dev instance) |
 | **Studio integration token** | token from Higson Studio — stored securely (OS keychain / Claude Code secret store), **not** in `settings.json`. Still, use a least-privilege token, not admin. |
 
 That's it — the plugin wires up the `higson` MCP server and loads the skill.
