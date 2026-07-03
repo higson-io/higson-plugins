@@ -5,6 +5,7 @@
   "author": {
     "name": "Higson"
   },
+  "license": "Apache-2.0",
   "homepage": "https://docs.higson.io/",
   "repository": "https://github.com/higson-io/higson-plugins",
   "keywords": [
