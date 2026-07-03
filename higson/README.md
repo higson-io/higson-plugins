@@ -46,10 +46,24 @@ That's it — the plugin wires up the `higson` MCP server and loads the skill.
 
 ## Usage
 
-After installation, just write naturally, e.g.:
-- "show my decision tables"
+After installation, just write naturally (English or Polish), e.g.:
+
+**Explore**
+- "what Higson version is this?"
+- "show my decision tables" / "pokaż moje tabele decyzyjne"
+- "list the functions tagged pricing"
+
+**Read**
+- "show the matrix of the PREMIUM table"
+- "what does the calculateDiscount function do?"
+
+**Change (asks for consent first)**
 - "change the premium for drivers under 25"
 - "add a flow that computes a discount"
+
+**Test & publish (asks for confirmation)**
+- "run the tests for this table"
+- "publish my changes"
 
 The skill activates itself when a Higson topic comes up. On first use it offers a quick,
 read-only discovery of the environment (with your consent) and saves notes to
@@ -63,6 +77,18 @@ never publishes or rejects sessions without your explicit consent.
 
 - `/help` → the `higson` skill should be listed.
 - Ask "what Higson version is this?" → Claude calls `higson_get_version`.
+
+## Troubleshooting
+
+| Symptom | Likely cause / fix |
+|---------|--------------------|
+| Higson tools not available | Plugin not enabled — check `/plugin`. After changing plugin files run `/reload-plugins` or restart. |
+| MCP server won't connect | `studio_url` unreachable or wrong. It must be the **MCP** endpoint, e.g. `…/api/mcp`. Confirm the instance is running and reachable from your machine. |
+| `401` / `403` from the server | Token missing, expired, or the token's user lacks the needed rights. Generate a fresh token; grant it the permissions the work requires. |
+| Changes don't show up in the runtime | Edits sit in an open **work session** until you publish — ask Claude to `publish` (edits are not live on a `SUCCESS` alone). |
+| `list_*` returns too much / overflows | Large profile — use filters: `pageSize`, `filterCode`, `filterTags` (functions also `filterTypes`), or `higson_search`. |
+| Need to change the URL or token | Reinstall the plugin, or edit `pluginConfigs` for `higson@higson-plugins` in your `~/.claude/settings.json`. |
+| Requires Higson 4.3+ | MCP is available from 4.3 — older instances won't expose the MCP endpoint. |
 
 ## Support
 
