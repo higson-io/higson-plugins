@@ -1,10 +1,13 @@
 {
   "name": "higson-plugins",
   "owner": {
-    "name": "Higson"
+    "name": "Higson",
+    "url": "https://github.com/higson-io"
   },
   "metadata": {
-    "description": "Higson plugins for Claude Code."
+    "description": "Higson plugins for Claude Code.",
+    "version": "1.0.0",
+    "homepage": "https://github.com/higson-io/higson-plugins"
   },
   "plugins": [
     {
