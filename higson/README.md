@@ -42,10 +42,14 @@ That's it — the plugin wires up the `higson` MCP server and loads the skill.
 ## Getting an integration token
 
 1. Log in to Higson Studio.
-2. Generate an **integration token** (STUDIO_INTEGRATION_TOKEN) in settings / the tokens UI.
-3. **Recommendation (least-privilege):** use a user with only the rights the work needs,
-   not admin. What the plugin can do via MCP equals what the token's user can do — an
-   admin token can, among other things, reject/publish other users' work sessions.
+2. In the top menu, open **Licenses and tokens** → the **Tokens** tab.
+3. Click **+ Add token** and fill in the token details — type **Studio**, the **user**
+   whose permissions the token should carry, and an **expiration date**.
+4. Copy the generated token value (the long `eyJ…` string) — that is what you paste into
+   the plugin's token field.
+5. **Least-privilege:** pick a user with only the rights the work needs, **not admin**.
+   What the plugin can do over MCP equals what the token's user can do — an admin token
+   can, among other things, reject/publish other users' work sessions.
 
 ## Usage
 

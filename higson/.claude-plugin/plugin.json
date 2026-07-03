@@ -21,9 +21,8 @@
     "studio_url": {
       "type": "string",
       "title": "Higson Studio MCP URL",
-      "description": "MCP URL of your Studio instance, e.g. http://localhost:8282/api/mcp or https://your-instance/api/mcp",
-      "required": true,
-      "default": "http://localhost:8282/api/mcp"
+      "description": "MCP URL of your Studio instance, e.g. https://your-instance/api/mcp (or http://localhost:8282/api/mcp for a local dev instance)",
+      "required": true
     },
     "token": {
       "type": "string",
