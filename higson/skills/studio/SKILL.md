@@ -1,5 +1,5 @@
 ---
-name: higson
+name: studio
 description: >-
   Operate a Higson BRMS instance through its MCP server — explore an unfamiliar
   Higson environment, or read/change/test/publish decision tables, Groovy/Python

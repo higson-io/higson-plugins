@@ -75,7 +75,7 @@ never publishes or rejects sessions without your explicit consent.
 
 ## Verification
 
-- `/help` → the `higson` skill should be listed.
+- `/help` → the `studio` skill (`higson:studio`) should be listed.
 - Ask "what Higson version is this?" → Claude calls `higson_get_version`.
 
 ## Troubleshooting
