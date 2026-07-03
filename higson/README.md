@@ -15,15 +15,15 @@ safely) and the **MCP server configuration** (connection to your instance) in on
 
 ```
 /plugin marketplace add higson-io/higson-plugins
-/plugin install higson-studio@higson-plugins
+/plugin install higson@higson-plugins
 ```
 
 - `higson-io/higson-plugins` — the GitHub repo hosting this marketplace.
-- `higson-studio` — the plugin name; `higson-plugins` — the marketplace name.
+- `higson` — the plugin name; `higson-plugins` — the marketplace name.
 
 For local development/testing you can also load the plugin directly:
 ```
-claude --plugin-dir /path/to/higson-studio
+claude --plugin-dir /path/to/higson
 ```
 (Note: `--plugin-dir` does not prompt for config — it uses defaults. Use marketplace install to be prompted for the token.)
 
