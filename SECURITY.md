@@ -9,7 +9,6 @@ itself — report those through your usual Higson support channel.
 | Version | Supported |
 |---------|-----------|
 | 1.0.x   | ✅ |
-| < 1.0   | ❌ |
 
 ## Reporting a vulnerability
 
@@ -38,8 +37,3 @@ Things to know when using this plugin:
 - **Nothing reaches the runtime until you publish.** The bundled skill reads before it
   writes, asks for consent before writing, and never publishes or rejects sessions
   without explicit confirmation.
-
-## Note for maintainers
-
-The "Report a vulnerability" button requires **private vulnerability reporting** to be
-enabled in the repository settings (Settings → Security → enable private reporting).
