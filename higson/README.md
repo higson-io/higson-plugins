@@ -16,10 +16,13 @@ safely) and the **MCP server configuration** (connection to your instance) in on
 ```
 /plugin marketplace add higson-io/higson-plugins
 /plugin install higson@higson-plugins
+/reload-plugins
 ```
 
 - `higson-io/higson-plugins` — the GitHub repo hosting this marketplace.
 - `higson` — the plugin name; `higson-plugins` — the marketplace name.
+- **`/reload-plugins` is required** after installing — it activates the skill and connects
+  the MCP server without restarting the session (or restart Claude Code instead).
 
 For local development/testing you can also load the plugin directly:
 ```

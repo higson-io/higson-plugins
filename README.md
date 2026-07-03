@@ -15,7 +15,11 @@ elements and flows, run tests, and publish changes, talking in plain English or 
 ```
 /plugin marketplace add higson-io/higson-plugins
 /plugin install higson@higson-plugins
+/reload-plugins
 ```
+
+**`/reload-plugins` is required** after install — it activates the skill and connects the
+MCP server in the current session (otherwise restart Claude Code).
 
 On enable, Claude Code prompts you for:
 
