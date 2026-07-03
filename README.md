@@ -22,7 +22,7 @@ On enable, Claude Code prompts you for:
 | Field | Value |
 |-------|-------|
 | **Higson Studio MCP URL** | e.g. `http://localhost:8282/api/mcp` or `https://your-instance/api/mcp` |
-| **Studio integration token** | a token generated in Higson Studio — **use a least-privilege user, not admin** (stored in `settings.json` as plain text) |
+| **Studio integration token** | a token generated in Higson Studio — **use a least-privilege user, not admin** (stored securely in your OS keychain / Claude Code secret store, not in `settings.json`) |
 
 See the [plugin README](./higson/README.md) for details, token setup, and usage examples.
 

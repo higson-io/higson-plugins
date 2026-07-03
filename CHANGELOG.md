@@ -13,6 +13,8 @@ and the plugin adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.h
   discovery cached to `.higson/knowledge.md`.
 - **MCP server configuration** (`higson`) — HTTP connection to a Higson Studio instance,
   with user-supplied `studio_url` and integration `token`.
+- The integration `token` is marked **`sensitive`** — stored in the OS keychain / Claude
+  Code secret store, never in plain text in `settings.json`.
 
 ### Requirements
 - Higson Studio **4.3+** (MCP is available from 4.3).

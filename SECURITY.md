@@ -25,9 +25,11 @@ Please include: affected version, a description, and steps to reproduce or a pro
 
 Things to know when using this plugin:
 
-- **Your integration token is stored in plain text** in your local
-  `~/.claude/settings.json` (under `pluginConfigs`). The plugin's `.mcp.json` contains
-  only a `${user_config.token}` placeholder — **no secret is committed to this repo**.
+- **Your integration token is marked `sensitive`** and stored in your OS keychain — or,
+  where no keychain is available, in Claude Code's local secret store
+  (`~/.claude/.credentials.json`, file mode `0600`). It is **not** written to
+  `settings.json`. The plugin's `.mcp.json` contains only a `${user_config.token}`
+  placeholder — **no secret is committed to this repo**.
 - **Use a least-privilege token, not an admin token.** What the plugin can do over MCP
   equals what the token's user can do. An admin token can, among other things,
   reject or publish **other users'** work sessions.

@@ -27,8 +27,9 @@
     "token": {
       "type": "string",
       "title": "Studio integration token",
-      "description": "Integration token generated in Higson Studio (least-privilege user). Stored in settings.json (plain), so use a scoped token, not admin.",
-      "required": true
+      "description": "Integration token generated in Higson Studio (least-privilege user). Use a scoped token, not admin.",
+      "required": true,
+      "sensitive": true
     }
   }
 }

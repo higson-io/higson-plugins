@@ -32,7 +32,7 @@ On enable, Claude Code **prompts you for two values**:
 | Field | What to enter |
 |-------|---------------|
 | **Higson Studio MCP URL** | e.g. `http://localhost:8282/api/mcp` or `https://your-instance/api/mcp` |
-| **Studio integration token** | token from Higson Studio (stored in `settings.json` as plain text — use a least-privilege token, not admin) |
+| **Studio integration token** | token from Higson Studio — stored securely (OS keychain / Claude Code secret store), **not** in `settings.json`. Still, use a least-privilege token, not admin. |
 
 That's it — the plugin wires up the `higson` MCP server and loads the skill.
 
@@ -87,7 +87,7 @@ never publishes or rejects sessions without your explicit consent.
 | `401` / `403` from the server | Token missing, expired, or the token's user lacks the needed rights. Generate a fresh token; grant it the permissions the work requires. |
 | Changes don't show up in the runtime | Edits sit in an open **work session** until you publish — ask Claude to `publish` (edits are not live on a `SUCCESS` alone). |
 | `list_*` returns too much / overflows | Large profile — use filters: `pageSize`, `filterCode`, `filterTags` (functions also `filterTypes`), or `higson_search`. |
-| Need to change the URL or token | Reinstall the plugin, or edit `pluginConfigs` for `higson@higson-plugins` in your `~/.claude/settings.json`. |
+| Need to change the URL or token | Reinstall the plugin to re-enter them. The `studio_url` lives in `pluginConfigs` in `~/.claude/settings.json`; the token lives in the secret store, not `settings.json`. |
 | Requires Higson 4.3+ | MCP is available from 4.3 — older instances won't expose the MCP endpoint. |
 
 ## Support
