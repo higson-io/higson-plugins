@@ -9,6 +9,8 @@ safely) and the **MCP server configuration** (connection to your instance) in on
 
 - Claude Code (recent version — the `/plugin` command must be available).
 - A running **Higson Studio 4.3+** instance (MCP is available from version 4.3).
+- The **MCP server enabled** on that instance (an optional server-side feature) — see the
+  [Higson docs](https://docs.higson.io/) for how to enable it.
 - An **integration token** generated in Studio (see below).
 
 ## Installation
