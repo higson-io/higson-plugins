@@ -1,0 +1,16 @@
+{
+  "name": "higson-plugins",
+  "owner": {
+    "name": "Higson"
+  },
+  "metadata": {
+    "description": "Higson plugins for Claude Code."
+  },
+  "plugins": [
+    {
+      "name": "higson-studio",
+      "source": "./higson-studio",
+      "description": "Higson Studio skill + MCP server for Claude Code — read/change/test/publish decision tables, functions, domain, flows."
+    }
+  ]
+}

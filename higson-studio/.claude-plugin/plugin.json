@@ -1,0 +1,24 @@
+{
+  "name": "higson-studio",
+  "description": "Operate a Higson BRMS through its Studio MCP server — read/change/test/publish decision tables, functions, domain, flows. Ships the Higson skill and wires up the Higson MCP server.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Higson"
+  },
+  "homepage": "https://docs.higson.io/",
+  "userConfig": {
+    "studio_url": {
+      "type": "string",
+      "title": "Higson Studio MCP URL",
+      "description": "MCP URL of your Studio instance, e.g. http://localhost:8282/api/mcp or https://your-instance/api/mcp",
+      "required": true,
+      "default": "http://localhost:8282/api/mcp"
+    },
+    "token": {
+      "type": "string",
+      "title": "Studio integration token",
+      "description": "Integration token generated in Higson Studio (least-privilege user). Stored in settings.json (plain), so use a scoped token, not admin.",
+      "required": true
+    }
+  }
+}

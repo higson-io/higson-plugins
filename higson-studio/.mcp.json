@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "higson": {
+      "type": "http",
+      "url": "${user_config.studio_url}",
+      "headers": {
+        "Authorization": "Bearer ${user_config.token}"
+      }
+    }
+  }
+}
