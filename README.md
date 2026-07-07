@@ -1,8 +1,6 @@
 # Higson plugins for Claude Code
 
-A [Claude Code](https://claude.com/claude-code) plugin marketplace for working with
-**Higson BRMS** directly from Claude — read and change decision tables, functions, domain
-elements and flows, run tests, and publish changes, talking in plain English or Polish.
+Work with Higson BRMS directly from Claude Code — read and change decision tables, functions, domain, and flows, run tests, and publish changes, talking in plain English or Polish. On first use, the plugin performs a read-only discovery of your Studio instance — reading the version, domains, decision tables, and functions configured there — and saves the results to .higson/knowledge.md, so Claude understands your business configuration from the start without re-querying the instance every session. The plugin bundles the Higson skill (teaches Claude to work with Higson safely) and the MCP server configuration (connection to your instance) in one package.
 
 ## Plugins
 
