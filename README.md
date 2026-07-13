@@ -19,9 +19,9 @@ one package.
 
 ## Installation
 
+<details>
+<summary><h3>Claude Code</h3></summary>
 <table><tr><td width="1000">
-
-### Claude Code
 
 ```
 /plugin marketplace add higson-io/higson-plugins
@@ -40,10 +40,11 @@ On enable, Claude Code prompts you for:
 | **Studio integration token** | a token generated in Higson Studio — **use a least-privilege user, not admin** (stored securely in your OS keychain / Claude Code secret store, not in `settings.json`) |
 
 </td></tr></table>
+</details>
 
+<details>
+<summary><h3>Codex</h3></summary>
 <table><tr><td width="1000">
-
-### Codex
 
 ```bash
 codex plugin marketplace add higson-io/higson-plugins
@@ -57,6 +58,7 @@ server: the token comes from the environment variable, the URL is your instance'
 endpoint.
 
 </td></tr></table>
+</details>
 
 See the [plugin README](./higson/README.md) for details, token setup, and usage examples.
 
