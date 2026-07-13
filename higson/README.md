@@ -67,7 +67,9 @@ Verify with `codex mcp list` — the `higson` server should be listed with
 
 **Skill-only alternative (no plugin):** copy `skills/studio/` from this repo into
 `~/.agents/skills/` and run the same two commands above — that is all the plugin does,
-unbundled.
+unbundled. The plugin is still the recommended path: it installs in one command, carries
+an explicit version (useful when reporting issues), and `codex plugin marketplace upgrade`
+keeps the skill up to date — a copied folder is a frozen snapshot you must refresh by hand.
 
 ## Getting an integration token
 
