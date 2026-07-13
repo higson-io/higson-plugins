@@ -39,7 +39,7 @@ On enable, Claude Code **prompts you for two values**:
 
 That's it — the plugin wires up the `higson` MCP server and loads the skill.
 
-### <img src="https://api.iconify.design/simple-icons/openai.svg?color=%2310A37F" height="20" alt=""> Codex
+### <picture><source media="(prefers-color-scheme: dark)" srcset="https://api.iconify.design/simple-icons/openai.svg?color=%23FFFFFF"><img src="https://api.iconify.design/simple-icons/openai.svg?color=%23000000" height="20" alt=""></picture> Codex
 
 ```bash
 codex plugin marketplace add higson-io/higson-plugins
