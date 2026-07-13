@@ -20,8 +20,7 @@ one package.
 ## Installation
 
 <details>
-<summary><h3>Claude Code</h3></summary>
-<table><tr><td width="1000">
+<summary><strong>Claude Code</strong></summary>
 
 ```
 /plugin marketplace add higson-io/higson-plugins
@@ -39,12 +38,10 @@ On enable, Claude Code prompts you for:
 | **Higson Studio MCP URL** | e.g. `https://your-instance/api/mcp` (or `http://localhost:8282/api/mcp` for a local dev instance) |
 | **Studio integration token** | a token generated in Higson Studio — **use a least-privilege user, not admin** (stored securely in your OS keychain / Claude Code secret store, not in `settings.json`) |
 
-</td></tr></table>
 </details>
 
 <details>
-<summary><h3>Codex</h3></summary>
-<table><tr><td width="1000">
+<summary><strong>Codex</strong></summary>
 
 ```bash
 codex plugin marketplace add higson-io/higson-plugins
@@ -57,7 +54,6 @@ Codex has no install-time configuration prompt, so the last two lines connect th
 server: the token comes from the environment variable, the URL is your instance's MCP
 endpoint.
 
-</td></tr></table>
 </details>
 
 See the [plugin README](./higson/README.md) for details, token setup, and usage examples.
