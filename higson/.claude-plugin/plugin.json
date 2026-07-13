@@ -1,7 +1,7 @@
 {
   "name": "higson",
   "description": "Operate a Higson BRMS through its Studio MCP server — read/change/test/publish decision tables, functions, domain, flows. Ships the Higson skill and wires up the Higson MCP server.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": {
     "name": "Higson"
   },

@@ -1,0 +1,21 @@
+{
+  "name": "higson",
+  "version": "1.1.0",
+  "description": "Operate a Higson BRMS through its Studio MCP server — read/change/test/publish decision tables, functions, domain, flows. Ships the Higson skill and wires up the Higson MCP server.",
+  "author": {
+    "name": "Higson"
+  },
+  "license": "Apache-2.0",
+  "homepage": "https://docs.higson.io/",
+  "repository": "https://github.com/higson-io/higson-plugins",
+  "keywords": [
+    "higson",
+    "brms",
+    "business-rules",
+    "decision-tables",
+    "pricing",
+    "rating",
+    "mcp"
+  ],
+  "skills": "./skills/"
+}

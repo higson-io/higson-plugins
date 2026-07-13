@@ -1,19 +1,23 @@
-# Higson plugin for Claude Code
+# Higson plugin for Claude Code and Codex
 
-Work with Higson BRMS directly from Claude Code — read and change decision tables,
+Work with Higson BRMS directly from your coding agent — read and change decision tables,
 functions, domain, and flows, run tests, and publish changes, talking in plain English
-or Polish. The plugin bundles the **Higson skill** (teaches Claude to work with Higson
+or Polish. The plugin bundles the **Higson skill** (teaches the agent to work with Higson
 safely) and the **MCP server configuration** (connection to your instance) in one package.
+One plugin, two agents: the same skill drives both **Claude Code** and **OpenAI Codex**.
 
 ## Requirements
 
-- Claude Code (recent version — the `/plugin` command must be available).
+- **Claude Code** (recent version — the `/plugin` command must be available), or
+  **Codex CLI** (recent version — with `codex plugin` support).
 - A running **Higson Studio 4.3+** instance (MCP is available from version 4.3).
 - The **MCP server enabled** on that instance (an optional server-side feature) — see the
   [Higson docs](https://docs.higson.io/) for how to enable it.
 - An **integration token** generated in Studio (see below).
 
 ## Installation
+
+### Claude Code
 
 ```
 /plugin marketplace add higson-io/higson-plugins
@@ -34,6 +38,36 @@ On enable, Claude Code **prompts you for two values**:
 | **Studio integration token** | token from Higson Studio — stored securely (OS keychain / Claude Code secret store), **not** in `settings.json`. Still, use a least-privilege token, not admin. |
 
 That's it — the plugin wires up the `higson` MCP server and loads the skill.
+
+### Codex
+
+```bash
+codex plugin marketplace add higson-io/higson-plugins
+codex plugin add higson@higson-plugins
+```
+
+This installs the Higson skill. Codex has no install-time prompt for configuration
+values (no equivalent of Claude Code's URL/token form), so connect the MCP server
+yourself — two one-time steps:
+
+```bash
+export HIGSON_MCP_TOKEN='<your integration token>'   # e.g. add to ~/.bashrc
+codex mcp add higson --url https://your-instance/api/mcp --bearer-token-env-var HIGSON_MCP_TOKEN
+```
+
+- **Token** — the `codex mcp add` command stores only the **variable name**; the value is
+  read from your environment **every time Codex starts** (it is never written to a config
+  file, and there is no flag to pass the value directly). The export must therefore be
+  active in every shell you run `codex` from — putting it in `~/.bashrc` is the practical
+  choice, and the order of the two commands does not matter.
+- **URL** — your instance's **MCP** endpoint, e.g. `https://your-instance/api/mcp`.
+
+Verify with `codex mcp list` — the `higson` server should be listed with
+`Bearer token` auth.
+
+**Skill-only alternative (no plugin):** copy `skills/studio/` from this repo into
+`~/.agents/skills/` and run the same two commands above — that is all the plugin does,
+unbundled.
 
 ## Getting an integration token
 
@@ -78,19 +112,22 @@ never publishes or rejects sessions without your explicit consent.
 
 ## Verification
 
-- `/help` → the `studio` skill (`higson:studio`) should be listed.
-- Ask "what Higson version is this?" → Claude calls `higson_get_version`.
+- Claude Code: `/help` → the `studio` skill (`higson:studio`) should be listed.
+- Codex: `codex mcp list` → the `higson` server is listed with `Bearer token` auth.
+- Either agent: ask "what Higson version is this?" → the agent calls `higson_get_version`.
 
 ## Troubleshooting
 
 | Symptom | Likely cause / fix |
 |---------|--------------------|
-| Higson tools not available | Plugin not enabled — check `/plugin`. After changing plugin files run `/reload-plugins` or restart. |
+| Higson tools not available | Plugin not enabled — check `/plugin` (Claude Code) or `codex plugin list` (Codex). After changing plugin files run `/reload-plugins` (Claude Code) / reinstall the plugin (Codex), or restart. |
 | MCP server won't connect | `studio_url` unreachable or wrong. It must be the **MCP** endpoint, e.g. `…/api/mcp`. Confirm the instance is running and reachable from your machine. |
 | `401` / `403` from the server | Token missing, expired, or the token's user lacks the needed rights. Generate a fresh token; grant it the permissions the work requires. |
 | Changes don't show up in the runtime | Edits sit in an open **work session** until you publish — ask Claude to `publish` (edits are not live on a `SUCCESS` alone). |
 | `list_*` returns too much / overflows | Large profile — use filters: `pageSize`, `filterCode`, `filterTags` (functions also `filterTypes`), or `higson_search`. |
-| Need to change the URL or token | Reinstall the plugin to re-enter them. The `studio_url` lives in `pluginConfigs` in `~/.claude/settings.json`; the token lives in the secret store, not `settings.json`. |
+| Need to change the URL or token | Claude Code: reinstall the plugin to re-enter them (the `studio_url` lives in `pluginConfigs` in `~/.claude/settings.json`; the token lives in the secret store, not `settings.json`). Codex: re-export `HIGSON_MCP_TOKEN` / re-run `codex mcp add higson --url …`. |
+| Codex: `401` although the token is valid | `HIGSON_MCP_TOKEN` not exported in the shell Codex runs from — `echo $HIGSON_MCP_TOKEN` to check; add the export to `~/.bashrc`. |
+| Codex: `relative URL without a base` on startup | The `--url` passed to `codex mcp add` is missing the scheme — use the full URL including `https://` (or `http://`). |
 | Requires Higson 4.3+ | MCP is available from 4.3 — older instances won't expose the MCP endpoint. |
 
 ## Support

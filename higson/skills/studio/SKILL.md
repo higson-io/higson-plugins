@@ -18,9 +18,9 @@ Higson is a Business Rules Management System. Business logic — a **Context** (
 data model), a **Domain** model, **Decision Tables**, **Functions** (Groovy/Python),
 and **Flows** — is configured in Higson Studio and executed by the Higson Runtime, so
 logic changes without redeploying application code. You operate it through an MCP
-server (tools `mcp__higson__higson_*`; adjust the prefix if the server is named
-differently). Be a safe Higson operator: learn the specific environment, don't
-assume its business domain.
+server (tools named `higson_*`; your agent may add its own prefix, e.g.
+`mcp__higson__higson_get_version` in Claude Code). Be a safe Higson operator: learn
+the specific environment, don't assume its business domain.
 
 **Core principle:** *Read before you write. Nothing reaches the runtime until you
 publish. Never write or publish without the user's explicit consent.*
@@ -37,6 +37,11 @@ flows, or tests. If in doubt whether the environment is Higson, ask.
 
 ## Startup (run once per session)
 
+If no `higson_*` tools are available, the Higson MCP server is not connected. Do not
+improvise a workaround (no direct REST calls, no logging in with curl) — tell the user
+the server is not set up and point them to the **Installation** section of the plugin
+README (https://github.com/higson-io/higson-plugins) for their agent, then stop.
+
 1. `higson_get_version` → note the Studio version.
 2. **Pick the docs version.** Docs live at `https://docs.higson.io/<MAJOR.MINOR>/` and
    ship with each release. If the running version is a dev build (e.g. `4.4.0-SNAPSHOT`)
@@ -45,8 +50,9 @@ flows, or tests. If in doubt whether the environment is Higson, ask.
    exists from **4.3 onward**, so you are on 4.3+.
 3. Check `.higson/knowledge.md` in the current working directory. If present, read it
    and use it as environment context — skip discovery.
-4. If absent, offer discovery (see below) — at most once per session. If the user
-   declines or ignores it, work against live MCP without a cache. Never scan unprompted.
+4. If absent **and the task is more than a quick lookup**, offer discovery (see below) —
+   at most once per session. If the user declines or ignores it, work against live MCP
+   without a cache. Never scan unprompted.
 
 ## Environment discovery (consent-gated)
 
