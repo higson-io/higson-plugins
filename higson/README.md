@@ -19,9 +19,6 @@ One plugin, two agents: the same skill drives both **Claude Code** and **OpenAI 
 
 ### Claude Code
 
-<details>
-<summary>Installation steps</summary>
-
 ```
 /plugin marketplace add higson-io/higson-plugins
 /plugin install higson@higson-plugins
@@ -42,12 +39,7 @@ On enable, Claude Code **prompts you for two values**:
 
 That's it — the plugin wires up the `higson` MCP server and loads the skill.
 
-</details>
-
 ### Codex
-
-<details>
-<summary>Installation steps</summary>
 
 ```bash
 codex plugin marketplace add higson-io/higson-plugins
@@ -76,8 +68,6 @@ Verify with `codex mcp list` — the `higson` server should be listed with
 **Skill-only alternative (no plugin):** copy `skills/studio/` from this repo into
 `~/.agents/skills/` and run the same two commands above — that is all the plugin does,
 unbundled.
-
-</details>
 
 ## Getting an integration token
 
