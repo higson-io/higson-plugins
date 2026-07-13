@@ -50,28 +50,27 @@ README (https://github.com/higson-io/higson-plugins) for their agent, then stop.
    exists from **4.3 onward**, so you are on 4.3+.
 3. Check `.higson/knowledge.md` in the current working directory. If present, read it
    and use it as environment context — skip discovery.
-4. If absent, offer discovery (see below) **before starting the work** — at most once
-   per session. The offer covers the **whole environment**, not just the profile under
-   discussion — the cache must serve future sessions on any profile. Skip the offer **only** when the whole session amounts to a single quick
-   lookup (one or two read calls and done). Multi-step work on a profile's tables,
-   functions or flows counts as real work **even when each read is targeted** — offer
-   first. **Re-evaluate as the session grows:** the moment a follow-up Higson question
-   arrives, the session is no longer a single lookup — make the offer before answering
-   it. If the user declines or ignores it, work against live MCP without a cache.
-   Never scan unprompted.
+4. If absent, make the discovery offer (see below) **in your first answer that uses MCP
+   data — always, no exceptions, no judging whether the task is "big enough"**. Answer
+   the user's question first, then append one line, e.g.: *"I have no cached knowledge of
+   this environment — I can run a read-only, environment-wide discovery (a handful of MCP
+   calls) and save notes to `.higson/knowledge.md` to speed up future sessions. Want me
+   to?"* The offer covers the **whole environment**, not just the profile under
+   discussion — the cache must serve future sessions on any profile. Make it **once per
+   session**: if the user declines or ignores it, work against live MCP without a cache
+   and do not repeat the offer. Never scan unprompted.
 
 ## Environment discovery (consent-gated)
 
 You will not know a specific instance's business domain — learn it, don't assume it.
 
-**When to offer discovery:** it pays off for an **unfamiliar environment you will
-revisit** — it builds context and speeds up later sessions. Skip the offer **only for a
-single quick lookup**; doing a series of targeted reads instead of a scan does **not**
-remove the need to offer, and neither does a conversation that keeps returning to the
-same environment or profile — that *is* the "you will revisit" case. Discovery is **never required to do a task** — you can always
-work against live MCP, finding just what the task needs. Offer it, never force it; and
-keep the cache fresh, because a stale `.higson/knowledge.md` misleads (the live MCP is
-the source of truth, the cache is only notes).
+**When to offer discovery:** whenever `.higson/knowledge.md` is absent — once per
+session, appended to your first MCP-based answer (see Startup). It pays off most for an
+**unfamiliar environment you will revisit** — it builds context and speeds up later
+sessions. Discovery is **never required to do a task** — you can always work against
+live MCP, finding just what the task needs. Offer it, never force it; and keep the
+cache fresh, because a stale `.higson/knowledge.md` misleads (the live MCP is the
+source of truth, the cache is only notes).
 
 1. **Check the cache first.** If `.higson/knowledge.md` exists, read it and use it as
    context — skip discovery.
