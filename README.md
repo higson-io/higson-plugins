@@ -19,38 +19,44 @@ one package.
 
 ## Installation
 
-> [!TIP]
-> ### Claude Code
->
-> ```
-> /plugin marketplace add higson-io/higson-plugins
-> /plugin install higson@higson-plugins
-> /reload-plugins
-> ```
->
-> **`/reload-plugins` is required** after install — it activates the skill and connects the
-> MCP server in the current session (otherwise restart Claude Code).
->
-> On enable, Claude Code prompts you for:
->
-> | Field | Value |
-> |-------|-------|
-> | **Higson Studio MCP URL** | e.g. `https://your-instance/api/mcp` (or `http://localhost:8282/api/mcp` for a local dev instance) |
-> | **Studio integration token** | a token generated in Higson Studio — **use a least-privilege user, not admin** (stored securely in your OS keychain / Claude Code secret store, not in `settings.json`) |
+<table><tr><td width="1000">
 
-> [!IMPORTANT]
-> ### Codex
->
-> ```bash
-> codex plugin marketplace add higson-io/higson-plugins
-> codex plugin add higson@higson-plugins
-> export HIGSON_MCP_TOKEN='<your integration token>'
-> codex mcp add higson --url https://your-instance/api/mcp --bearer-token-env-var HIGSON_MCP_TOKEN
-> ```
->
-> Codex has no install-time configuration prompt, so the last two lines connect the MCP
-> server: the token comes from the environment variable, the URL is your instance's MCP
-> endpoint.
+### Claude Code
+
+```
+/plugin marketplace add higson-io/higson-plugins
+/plugin install higson@higson-plugins
+/reload-plugins
+```
+
+**`/reload-plugins` is required** after install — it activates the skill and connects the
+MCP server in the current session (otherwise restart Claude Code).
+
+On enable, Claude Code prompts you for:
+
+| Field | Value |
+|-------|-------|
+| **Higson Studio MCP URL** | e.g. `https://your-instance/api/mcp` (or `http://localhost:8282/api/mcp` for a local dev instance) |
+| **Studio integration token** | a token generated in Higson Studio — **use a least-privilege user, not admin** (stored securely in your OS keychain / Claude Code secret store, not in `settings.json`) |
+
+</td></tr></table>
+
+<table><tr><td width="1000">
+
+### Codex
+
+```bash
+codex plugin marketplace add higson-io/higson-plugins
+codex plugin add higson@higson-plugins
+export HIGSON_MCP_TOKEN='<your integration token>'
+codex mcp add higson --url https://your-instance/api/mcp --bearer-token-env-var HIGSON_MCP_TOKEN
+```
+
+Codex has no install-time configuration prompt, so the last two lines connect the MCP
+server: the token comes from the environment variable, the URL is your instance's MCP
+endpoint.
+
+</td></tr></table>
 
 See the [plugin README](./higson/README.md) for details, token setup, and usage examples.
 
