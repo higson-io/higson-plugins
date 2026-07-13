@@ -19,7 +19,7 @@ one package.
 
 ## Installation
 
-### <img src="https://cdn.simpleicons.org/claude/D97757" height="20" alt=""> Claude Code
+### <img src="https://api.iconify.design/simple-icons/claude.svg?color=%23D97757" height="20" alt=""> Claude Code
 
 ```
 /plugin marketplace add higson-io/higson-plugins
@@ -37,7 +37,7 @@ On enable, Claude Code prompts you for:
 | **Higson Studio MCP URL** | e.g. `https://your-instance/api/mcp` (or `http://localhost:8282/api/mcp` for a local dev instance) |
 | **Studio integration token** | a token generated in Higson Studio — **use a least-privilege user, not admin** (stored securely in your OS keychain / Claude Code secret store, not in `settings.json`) |
 
-### <img src="https://cdn.simpleicons.org/openai/10A37F" height="20" alt=""> Codex
+### <img src="https://api.iconify.design/simple-icons/openai.svg?color=%2310A37F" height="20" alt=""> Codex
 
 ```bash
 codex plugin marketplace add higson-io/higson-plugins
