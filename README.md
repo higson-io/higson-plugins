@@ -19,7 +19,7 @@ one package.
 
 ## Installation
 
-$${\color{#D97757}\large\textsf{Claude Code}}$$
+### Claude Code
 
 <details>
 <summary>Installation steps</summary>
@@ -42,7 +42,7 @@ On enable, Claude Code prompts you for:
 
 </details>
 
-$${\color{#10A37F}\large\textsf{Codex}}$$
+### Codex
 
 <details>
 <summary>Installation steps</summary>

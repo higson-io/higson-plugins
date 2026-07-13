@@ -17,7 +17,7 @@ One plugin, two agents: the same skill drives both **Claude Code** and **OpenAI 
 
 ## Installation
 
-$${\color{#D97757}\large\textsf{Claude Code}}$$
+### Claude Code
 
 <details>
 <summary>Installation steps</summary>
@@ -44,7 +44,7 @@ That's it — the plugin wires up the `higson` MCP server and loads the skill.
 
 </details>
 
-$${\color{#10A37F}\large\textsf{Codex}}$$
+### Codex
 
 <details>
 <summary>Installation steps</summary>
