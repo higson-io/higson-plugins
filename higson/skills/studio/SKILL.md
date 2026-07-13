@@ -54,7 +54,9 @@ README (https://github.com/higson-io/higson-plugins) for their agent, then stop.
    per session. Skip the offer **only** when the whole session amounts to a single quick
    lookup (one or two read calls and done). Multi-step work on a profile's tables,
    functions or flows counts as real work **even when each read is targeted** — offer
-   first. If the user declines or ignores it, work against live MCP without a cache.
+   first. **Re-evaluate as the session grows:** the moment a follow-up Higson question
+   arrives, the session is no longer a single lookup — make the offer before answering
+   it. If the user declines or ignores it, work against live MCP without a cache.
    Never scan unprompted.
 
 ## Environment discovery (consent-gated)
@@ -64,7 +66,8 @@ You will not know a specific instance's business domain — learn it, don't assu
 **When to offer discovery:** it pays off for an **unfamiliar environment you will
 revisit** — it builds context and speeds up later sessions. Skip the offer **only for a
 single quick lookup**; doing a series of targeted reads instead of a scan does **not**
-remove the need to offer. Discovery is **never required to do a task** — you can always
+remove the need to offer, and neither does a conversation that keeps returning to the
+same environment or profile — that *is* the "you will revisit" case. Discovery is **never required to do a task** — you can always
 work against live MCP, finding just what the task needs. Offer it, never force it; and
 keep the cache fresh, because a stale `.higson/knowledge.md` misleads (the live MCP is
 the source of truth, the cache is only notes).
