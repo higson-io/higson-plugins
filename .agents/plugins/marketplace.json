@@ -1,0 +1,10 @@
+{
+  "name": "higson-plugins",
+  "plugins": [
+    {
+      "name": "higson",
+      "source": { "source": "local", "path": "./higson" },
+      "description": "Higson Studio skill + MCP server — read/change/test/publish decision tables, functions, domain, flows from Claude Code or Codex."
+    }
+  ]
+}
