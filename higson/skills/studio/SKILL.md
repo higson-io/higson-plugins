@@ -51,7 +51,8 @@ README (https://github.com/higson-io/higson-plugins) for their agent, then stop.
 3. Check `.higson/knowledge.md` in the current working directory. If present, read it
    and use it as environment context — skip discovery.
 4. If absent, offer discovery (see below) **before starting the work** — at most once
-   per session. Skip the offer **only** when the whole session amounts to a single quick
+   per session. The offer covers the **whole environment**, not just the profile under
+   discussion — the cache must serve future sessions on any profile. Skip the offer **only** when the whole session amounts to a single quick
    lookup (one or two read calls and done). Multi-step work on a profile's tables,
    functions or flows counts as real work **even when each read is targeted** — offer
    first. **Re-evaluate as the session grows:** the moment a follow-up Higson question
@@ -79,7 +80,9 @@ the source of truth, the cache is only notes).
    explore it read-only (a handful of MCP calls) and save a summary to
    `.higson/knowledge.md`. Proceed?"* Do not scan unprompted; if consent is declined,
    work against live MCP calls without a cache.
-3. **On consent, probe read-only, broad → narrow:** `higson_list_context_types` +
+3. **On consent, probe read-only, broad → narrow — environment-wide, not one profile**
+   (give the profile you are currently working with a deeper pass, but map them all):
+   `higson_list_context_types` +
    `higson_get_context_type_paths`; `higson_get_domain_configuration_tree`; a few
    representative decision tables / functions (`higson_list_decision_tables` /
    `higson_list_functions` with `pageSize`/`filterCode`/`filterTags`, then
