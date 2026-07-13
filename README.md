@@ -20,7 +20,7 @@ one package.
 ## Installation
 
 <details>
-<summary><strong>Claude Code</strong></summary>
+<summary><img src="https://img.shields.io/badge/Claude_Code-D97757?style=for-the-badge&logo=claude&logoColor=white" alt="Claude Code"></summary>
 
 ```
 /plugin marketplace add higson-io/higson-plugins
@@ -41,7 +41,7 @@ On enable, Claude Code prompts you for:
 </details>
 
 <details>
-<summary><strong>Codex</strong></summary>
+<summary><img src="https://img.shields.io/badge/Codex-10A37F?style=for-the-badge&logo=openai&logoColor=white" alt="Codex"></summary>
 
 ```bash
 codex plugin marketplace add higson-io/higson-plugins
