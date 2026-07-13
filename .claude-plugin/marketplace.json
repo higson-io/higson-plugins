@@ -5,15 +5,15 @@
     "url": "https://github.com/higson-io"
   },
   "metadata": {
-    "description": "Higson plugins for Claude Code.",
-    "version": "1.0.0",
+    "description": "Higson plugins for Claude Code and Codex.",
+    "version": "1.1.0",
     "homepage": "https://github.com/higson-io/higson-plugins"
   },
   "plugins": [
     {
       "name": "higson",
       "source": "./higson",
-      "description": "Higson Studio skill + MCP server for Claude Code — read/change/test/publish decision tables, functions, domain, flows."
+      "description": "Higson Studio skill + MCP server — read/change/test/publish decision tables, functions, domain, flows from Claude Code or Codex."
     }
   ]
 }
