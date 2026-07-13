@@ -4,13 +4,6 @@ All notable changes to the **higson** plugin are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and the plugin adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.1] - 2026-07-13
-
-### Fixed
-- **Skill**: the environment-discovery offer was skipped when the agent classified its
-  work as "targeted reads". Clarified: the offer is the default before starting real
-  work; only a single quick lookup skips it — a series of targeted reads does not.
-
 ## [1.1.0] - 2026-07-13
 
 ### Added
@@ -23,8 +16,9 @@ and the plugin adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 ### Changed
 - **Skill**: tool references are agent-neutral (`higson_*` — agents may add their own
   prefix); new no-MCP fallback (with no `higson_*` tools available, the agent points the
-  user to the README instead of improvising REST calls); environment discovery is offered
-  only for tasks beyond a quick lookup.
+  user to the README instead of improvising REST calls); environment discovery is offered by default
+  before starting real work — only a single quick lookup skips the offer (a series of
+  targeted reads does not).
 
 ### Notes
 - In Codex the MCP server is connected manually
