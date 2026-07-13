@@ -17,57 +17,59 @@ One plugin, two agents: the same skill drives both **Claude Code** and **OpenAI 
 
 ## Installation
 
-### Claude Code
+> [!TIP]
+> ### Claude Code
+>
+> ```
+> /plugin marketplace add higson-io/higson-plugins
+> /plugin install higson@higson-plugins
+> /reload-plugins
+> ```
+>
+> - `higson-io/higson-plugins` — the GitHub repo hosting this marketplace.
+> - `higson` — the plugin name; `higson-plugins` — the marketplace name.
+> - **`/reload-plugins` is required** after installing — it activates the skill and connects
+>   the MCP server without restarting the session (or restart Claude Code instead).
+>
+> On enable, Claude Code **prompts you for two values**:
+>
+> | Field | What to enter |
+> |-------|---------------|
+> | **Higson Studio MCP URL** | e.g. `https://your-instance/api/mcp` (or `http://localhost:8282/api/mcp` for a local dev instance) |
+> | **Studio integration token** | token from Higson Studio — stored securely (OS keychain / Claude Code secret store), **not** in `settings.json`. Still, use a least-privilege token, not admin. |
+>
+> That's it — the plugin wires up the `higson` MCP server and loads the skill.
 
-```
-/plugin marketplace add higson-io/higson-plugins
-/plugin install higson@higson-plugins
-/reload-plugins
-```
-
-- `higson-io/higson-plugins` — the GitHub repo hosting this marketplace.
-- `higson` — the plugin name; `higson-plugins` — the marketplace name.
-- **`/reload-plugins` is required** after installing — it activates the skill and connects
-  the MCP server without restarting the session (or restart Claude Code instead).
-
-On enable, Claude Code **prompts you for two values**:
-
-| Field | What to enter |
-|-------|---------------|
-| **Higson Studio MCP URL** | e.g. `https://your-instance/api/mcp` (or `http://localhost:8282/api/mcp` for a local dev instance) |
-| **Studio integration token** | token from Higson Studio — stored securely (OS keychain / Claude Code secret store), **not** in `settings.json`. Still, use a least-privilege token, not admin. |
-
-That's it — the plugin wires up the `higson` MCP server and loads the skill.
-
-### Codex
-
-```bash
-codex plugin marketplace add higson-io/higson-plugins
-codex plugin add higson@higson-plugins
-```
-
-This installs the Higson skill. Codex has no install-time prompt for configuration
-values (no equivalent of Claude Code's URL/token form), so connect the MCP server
-yourself — two one-time steps:
-
-```bash
-export HIGSON_MCP_TOKEN='<your integration token>'   # e.g. add to ~/.bashrc
-codex mcp add higson --url https://your-instance/api/mcp --bearer-token-env-var HIGSON_MCP_TOKEN
-```
-
-- **Token** — the `codex mcp add` command stores only the **variable name**; the value is
-  read from your environment **every time Codex starts** (it is never written to a config
-  file, and there is no flag to pass the value directly). The export must therefore be
-  active in every shell you run `codex` from — putting it in `~/.bashrc` is the practical
-  choice, and the order of the two commands does not matter.
-- **URL** — your instance's **MCP** endpoint, e.g. `https://your-instance/api/mcp`.
-
-Verify with `codex mcp list` — the `higson` server should be listed with
-`Bearer token` auth.
-
-**Skill-only alternative (no plugin):** copy `skills/studio/` from this repo into
-`~/.agents/skills/` and run the same two commands above — that is all the plugin does,
-unbundled.
+> [!IMPORTANT]
+> ### Codex
+>
+> ```bash
+> codex plugin marketplace add higson-io/higson-plugins
+> codex plugin add higson@higson-plugins
+> ```
+>
+> This installs the Higson skill. Codex has no install-time prompt for configuration
+> values (no equivalent of Claude Code's URL/token form), so connect the MCP server
+> yourself — two one-time steps:
+>
+> ```bash
+> export HIGSON_MCP_TOKEN='<your integration token>'   # e.g. add to ~/.bashrc
+> codex mcp add higson --url https://your-instance/api/mcp --bearer-token-env-var HIGSON_MCP_TOKEN
+> ```
+>
+> - **Token** — the `codex mcp add` command stores only the **variable name**; the value is
+>   read from your environment **every time Codex starts** (it is never written to a config
+>   file, and there is no flag to pass the value directly). The export must therefore be
+>   active in every shell you run `codex` from — putting it in `~/.bashrc` is the practical
+>   choice, and the order of the two commands does not matter.
+> - **URL** — your instance's **MCP** endpoint, e.g. `https://your-instance/api/mcp`.
+>
+> Verify with `codex mcp list` — the `higson` server should be listed with
+> `Bearer token` auth.
+>
+> **Skill-only alternative (no plugin):** copy `skills/studio/` from this repo into
+> `~/.agents/skills/` and run the same two commands above — that is all the plugin does,
+> unbundled.
 
 ## Getting an integration token
 
