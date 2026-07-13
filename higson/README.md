@@ -83,6 +83,12 @@ keeps the skill up to date — a copied folder is a frozen snapshot you must ref
    What the plugin can do over MCP equals what the token's user can do — an admin token
    can, among other things, reject/publish other users' work sessions.
 
+## Verification
+
+- Claude Code: `/help` → the `studio` skill (`higson:studio`) should be listed.
+- Codex: `codex mcp list` → the `higson` server is listed with `Bearer token` auth.
+- Either agent: ask "what Higson version is this?" → the agent calls `higson_get_version`.
+
 ## Usage
 
 After installation, just write naturally (English or Polish), e.g.:
@@ -111,12 +117,6 @@ read-only discovery of the environment (with your consent) and saves notes to
 **Safety rules built into the skill:** it reads before changing, shows a diff and asks
 for consent before writing, reminds you that a change is not live until `publish`, and
 never publishes or rejects sessions without your explicit consent.
-
-## Verification
-
-- Claude Code: `/help` → the `studio` skill (`higson:studio`) should be listed.
-- Codex: `codex mcp list` → the `higson` server is listed with `Bearer token` auth.
-- Either agent: ask "what Higson version is this?" → the agent calls `higson_get_version`.
 
 ## Troubleshooting
 
