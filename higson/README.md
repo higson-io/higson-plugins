@@ -19,6 +19,8 @@ One plugin, two agents: the same skill drives both **Claude Code** and **OpenAI 
 
 ### <img src="https://api.iconify.design/simple-icons/claude.svg?color=%23D97757" height="16" alt=""> Claude Code
 
+Run these as slash commands **inside a running Claude Code session** (at the `>` prompt):
+
 ```
 /plugin marketplace add higson-io/higson-plugins
 /plugin install higson@higson-plugins
@@ -40,6 +42,8 @@ On enable, Claude Code **prompts you for two values**:
 That's it — the plugin wires up the `higson` MCP server and loads the skill.
 
 ### <picture><source media="(prefers-color-scheme: dark)" srcset="https://api.iconify.design/simple-icons/openai.svg?color=%23FFFFFF"><img src="https://api.iconify.design/simple-icons/openai.svg?color=%23000000" height="16" alt=""></picture> Codex
+
+Run these from your **shell (bash)**:
 
 ```bash
 codex plugin marketplace add higson-io/higson-plugins

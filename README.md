@@ -30,6 +30,8 @@ one package.
 
 ### <img src="https://api.iconify.design/simple-icons/claude.svg?color=%23D97757" height="16" alt=""> Claude Code
 
+Run these as slash commands **inside a running Claude Code session** (at the `>` prompt):
+
 ```
 /plugin marketplace add higson-io/higson-plugins
 /plugin install higson@higson-plugins
@@ -47,6 +49,8 @@ On enable, Claude Code prompts you for:
 | **Studio integration token** | a token generated in Higson Studio — **use a least-privilege user, not admin** (stored securely in your OS keychain / Claude Code secret store, not in `settings.json`) |
 
 ### <picture><source media="(prefers-color-scheme: dark)" srcset="https://api.iconify.design/simple-icons/openai.svg?color=%23FFFFFF"><img src="https://api.iconify.design/simple-icons/openai.svg?color=%23000000" height="16" alt=""></picture> Codex
+
+Run these from your **shell (bash)**:
 
 ```bash
 codex plugin marketplace add higson-io/higson-plugins
