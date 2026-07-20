@@ -45,7 +45,7 @@ On enable, Claude Code prompts you for:
 
 | Field | Value |
 |-------|-------|
-| **Higson Studio MCP URL** | e.g. `https://your-instance/api/mcp` (or `http://localhost:8282/api/mcp` for a local dev instance) |
+| **Higson Studio MCP URL** | the full MCP endpoint, in the form `<base-url>[/<context-path>]/api/mcp` — e.g. `https://your-instance/api/mcp` (no context path), `https://your-instance/higson/api/mcp` (context path `/higson`), or `http://localhost:8282/api/mcp` for a local dev instance. Ask your instance administrator whether your deployment sets a context path. |
 | **Studio integration token** | a token generated in Higson Studio — **use a least-privilege user, not admin** (stored securely in your OS keychain / Claude Code secret store, not in `settings.json`) |
 
 ### <picture><source media="(prefers-color-scheme: dark)" srcset="https://api.iconify.design/simple-icons/openai.svg?color=%23FFFFFF"><img src="https://api.iconify.design/simple-icons/openai.svg?color=%23000000" height="16" alt=""></picture> Codex
@@ -61,7 +61,10 @@ codex mcp add higson --url https://your-instance/api/mcp --bearer-token-env-var 
 
 Codex has no install-time configuration prompt, so the last two lines connect the MCP
 server: the token comes from the environment variable, the URL is your instance's MCP
-endpoint.
+endpoint — in the form `<base-url>[/<context-path>]/api/mcp`, e.g.
+`https://your-instance/api/mcp` without a context path or
+`https://your-instance/higson/api/mcp` with the context path `/higson`. Ask your instance
+administrator whether your deployment sets one.
 
 See the [plugin README](./higson/README.md) for details, token setup, and usage examples.
 

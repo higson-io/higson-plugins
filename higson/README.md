@@ -36,7 +36,7 @@ On enable, Claude Code **prompts you for two values**:
 
 | Field | What to enter |
 |-------|---------------|
-| **Higson Studio MCP URL** | e.g. `https://your-instance/api/mcp` (or `http://localhost:8282/api/mcp` for a local dev instance) |
+| **Higson Studio MCP URL** | the full MCP endpoint, in the form `<base-url>[/<context-path>]/api/mcp`:<br>• `https://your-instance/api/mcp` — deployment without a context path<br>• `https://your-instance/higson/api/mcp` — context path `/higson`<br>• `http://localhost:8282/api/mcp` — local dev instance<br>Ask your instance administrator whether your deployment sets a context path. |
 | **Studio integration token** | token from Higson Studio — stored securely (OS keychain / Claude Code secret store), **not** in `settings.json`. Still, use a least-privilege token, not admin. |
 
 That's it — the plugin wires up the `higson` MCP server and loads the skill.
@@ -64,7 +64,11 @@ codex mcp add higson --url https://your-instance/api/mcp --bearer-token-env-var 
   file, and there is no flag to pass the value directly). The export must therefore be
   active in every shell you run `codex` from — putting it in `~/.bashrc` is the practical
   choice, and the order of the two commands does not matter.
-- **URL** — your instance's **MCP** endpoint, e.g. `https://your-instance/api/mcp`.
+- **URL** — your instance's **MCP** endpoint, in the form
+  `<base-url>[/<context-path>]/api/mcp`: `https://your-instance/api/mcp` without a context
+  path, `https://your-instance/higson/api/mcp` with the context path `/higson`. Ask your
+  instance administrator whether your deployment sets one — a missing or wrong context path
+  is the usual reason the server won't connect.
 
 Verify with `codex mcp list` — the `higson` server should be listed with
 `Bearer token` auth.
@@ -127,7 +131,7 @@ never publishes or rejects sessions without your explicit consent.
 | Symptom | Likely cause / fix |
 |---------|--------------------|
 | Higson tools not available | Plugin not enabled — check `/plugin` (Claude Code) or `codex plugin list` (Codex). After changing plugin files run `/reload-plugins` (Claude Code) / reinstall the plugin (Codex), or restart. |
-| MCP server won't connect | `studio_url` unreachable or wrong. It must be the **MCP** endpoint, e.g. `…/api/mcp`. Confirm the instance is running and reachable from your machine. |
+| MCP server won't connect | `studio_url` unreachable or wrong. It must be the **MCP** endpoint, `<base-url>[/<context-path>]/api/mcp` — a deployment served under a context path (e.g. `/higson`) needs it in the URL; ask your instance administrator. Confirm the instance is running and reachable from your machine. |
 | `401` / `403` from the server | Token missing, expired, or the token's user lacks the needed rights. Generate a fresh token; grant it the permissions the work requires. |
 | Changes don't show up in the runtime | Edits sit in an open **work session** until you publish — ask Claude to `publish` (edits are not live on a `SUCCESS` alone). |
 | `list_*` returns too much / overflows | Large profile — use filters: `pageSize`, `filterCode`, `filterTags` (functions also `filterTypes`), or `higson_search`. |
