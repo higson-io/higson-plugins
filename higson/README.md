@@ -12,7 +12,7 @@ One plugin, two agents: the same skill drives both **Claude Code** and **OpenAI 
   **Codex CLI** (recent version — with `codex plugin` support).
 - A running **Higson Studio 4.3+** instance (MCP is available from version 4.3).
 - The **MCP server enabled** on that instance (an optional server-side feature) — see the
-  [Higson docs](https://docs.higson.io/) for how to enable it.
+  [Higson docs — MCP Server](https://docs.higson.io/4.3/technical-docs/13_mcp-server/#enabling-the-mcp-server) for how to enable it.
 - An **integration token** generated in Studio (see below).
 
 ## Installation
