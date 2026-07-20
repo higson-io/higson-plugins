@@ -45,7 +45,7 @@ On enable, Claude Code prompts you for:
 
 | Field | Value |
 |-------|-------|
-| **Higson Studio MCP URL** | the full MCP endpoint, in the form `<base-url>[/<context-path>]/api/mcp` — e.g. `https://your-instance/api/mcp` (no context path), `https://your-instance/higson/api/mcp` (context path `/higson`), or `http://localhost:8282/api/mcp` for a local dev instance. Ask your instance administrator whether your deployment sets a context path. |
+| **Higson Studio MCP URL** | the full MCP endpoint, in the form `<base-url>[/<context-path>]/api/mcp`:<br>• `https://your-instance/api/mcp` — deployment without a context path<br>• `https://your-instance/higson/api/mcp` — context path `/higson`<br>• `http://localhost:8282/api/mcp` — local dev instance<br>Ask your instance administrator whether your deployment sets a context path. |
 | **Studio integration token** | a token generated in Higson Studio — **use a least-privilege user, not admin** (stored securely in your OS keychain / Claude Code secret store, not in `settings.json`) |
 
 ### <picture><source media="(prefers-color-scheme: dark)" srcset="https://api.iconify.design/simple-icons/openai.svg?color=%23FFFFFF"><img src="https://api.iconify.design/simple-icons/openai.svg?color=%23000000" height="16" alt=""></picture> Codex
