@@ -8,7 +8,7 @@ description: >-
   decyzyjna, funkcja, przepływ (flow), profil, publikacja, składka, stawka, taryfa,
   reguła cenowa. Also use for pricing/rating/eligibility logic backed by Higson.
 metadata:
-  version: 1.0.0
+  version: 1.2.0
   docs_url: "https://docs.higson.io/{version}/"
 ---
 
@@ -179,6 +179,18 @@ error / column shift. `*` in a cell = matches anything incl. null (default row);
 `FLOW` — the table/function/flow drives it. Pass `valueType` to `set_domain_attribute`.
 *(full: `higson://docs/domain`)*
 
+**Function body — reading a decision table:** the single-value getters
+(`higson.getDecimal`/`getString`/`getInteger`/…) return the first cell;
+**`higson.getValue(table, ctx)`** returns a **matrix** — every row matching the context.
+**There is no `getAll`.** Four traps, all silent:
+`row()` on an unmatched result yields **`null`** instead of throwing (while `row(99)`
+out of range *does* throw) — guard with `isEmpty()` first; `getNumber`/`getBoolean` are
+primitives, so an empty cell reads as `0.0`/`false` with no error — use
+`getDecimal`/`getInteger`/`getLong` for nullable columns; array/list getters
+(`getStringList`, …) live on a **row**, not on the matrix; and `isEmpty()` is not
+`isBlank()` (a row of nulls is blank, not empty).
+*(full API, addressing, collection idioms: `higson://docs/functions`)*
+
 ## Deeper knowledge — read on demand from MCP resources
 
 The server ships versioned docs as MCP resources. When unsure about syntax, flags, or
@@ -191,7 +203,7 @@ tool semantics, read the relevant one instead of guessing —
 | Context (input model) | `higson://docs/context` |
 | Domain (definition/config) | `higson://docs/domain` |
 | Decision tables (all matchers, flags, sorts, alias) | `higson://docs/decision-tables` |
-| Functions (Groovy API, examples) | `higson://docs/functions` |
+| Functions (Groovy API, matrix results, traps) | `higson://docs/functions` |
 | Flows | `higson://docs/flows` |
 | Testing | `higson://docs/testing` |
 | Naming conventions | `higson://docs/naming-conventions` |
@@ -199,7 +211,8 @@ tool semantics, read the relevant one instead of guessing —
 | Full MCP tools reference | `higson://docs/mcp-tools-reference` |
 
 `ListMcpResourcesTool(server="higson")` lists them. Prefer these over the versioned web
-docs when connected.
+docs when connected. **Read `higson://docs/functions` before writing or editing a
+function body** — the decision-table result API is where invented methods creep in.
 
 ## Common mistakes — STOP
 
@@ -209,6 +222,12 @@ docs when connected.
 - Calling `reject_changes` to undo one change → it discards pending work-session changes. Restore the
   value instead.
 - Editing a `LITERAL` when the attribute is `PARAMETER`/`FUNCTION`/`FLOW`.
+- Writing `higson.getAll(...)` in a function body → no such method. `getValue` returns
+  the matrix.
+- Reading a matrix without an `isEmpty()` guard → `row()` hands back `null` and the
+  NullPointerException surfaces somewhere else.
+- Reaching for `getNumber`/`getBoolean` on a nullable column → a missing rate prices as
+  `0.0` instead of failing.
 - Dumping raw `list_*` on a large profile → overflow. Use `search`/filters.
 - Scanning, writing, or publishing without asking first.
 - Persisting environment knowledge to ad-hoc memory instead of `.higson/knowledge.md`.

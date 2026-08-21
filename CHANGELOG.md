@@ -4,6 +4,23 @@ All notable changes to the **higson** plugin are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and the plugin adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-08-21
+
+### Added
+- **Skill**: inline essentials for reading a decision table from a function body —
+  `getValue` returns a matrix, the single-value getters return the first cell, and the
+  four silent traps (unmatched `row()` yields `null`; `getNumber`/`getBoolean` are
+  primitives that read an empty cell as `0.0`/`false`; array/list getters live on a row,
+  not the matrix; `isEmpty()` is not `isBlank()`).
+- **Skill**: three matching entries in *Common mistakes*, and an explicit instruction to
+  read `higson://docs/functions` before writing or editing a function body.
+
+### Fixed
+- **Skill**: `higson.getAll(...)` is called out as non-existent. It was being written
+  into function bodies from an outdated example in the MCP server's `higson://docs/functions`
+  resource; the correct method for multi-row results is `higson.getValue(table, ctx)`.
+- **Skill**: `metadata.version` was left at `1.0.0` while the plugin shipped `1.1.0`.
+
 ## [1.1.0] - 2026-07-13
 
 ### Added
