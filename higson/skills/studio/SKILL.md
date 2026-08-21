@@ -8,7 +8,7 @@ description: >-
   decyzyjna, funkcja, przepływ (flow), profil, publikacja, składka, stawka, taryfa,
   reguła cenowa. Also use for pricing/rating/eligibility logic backed by Higson.
 metadata:
-  version: 1.2.0
+  version: 1.2.1
   docs_url: "https://docs.higson.io/{version}/"
 ---
 
@@ -182,14 +182,40 @@ error / column shift. `*` in a cell = matches anything incl. null (default row);
 **Function body — reading a decision table:** the single-value getters
 (`higson.getDecimal`/`getString`/`getInteger`/…) return the first cell;
 **`higson.getValue(table, ctx)`** returns a **matrix** — every row matching the context.
-**There is no `getAll`.** Four traps, all silent:
-`row()` on an unmatched result yields **`null`** instead of throwing (while `row(99)`
-out of range *does* throw) — guard with `isEmpty()` first; `getNumber`/`getBoolean` are
-primitives, so an empty cell reads as `0.0`/`false` with no error — use
-`getDecimal`/`getInteger`/`getLong` for nullable columns; array/list getters
-(`getStringList`, …) live on a **row**, not on the matrix; and `isEmpty()` is not
-`isBlank()` (a row of nulls is blank, not empty).
+**There is no `getAll`, and no `higson.getLong`.** On no match the behaviour depends on the
+table's **nullable** flag (off by default): non-nullable **throws**
+`ParameterValueNotFoundException`; nullable returns an empty matrix whose `row()` yields
+**`null`** instead of throwing — while `row(99)` out of range *does* throw, so guard with
+`isEmpty()` before addressing a row. `getNumber`/`getBoolean` are primitives, so an empty
+cell reads as `0.0`/`false` with no error — use `getDecimal`/`getInteger` for nullable
+columns, or a **holder** (`matrix.getHolder(col)`, `ctx.get<Type>Holder(path)`,
+`type.to<Type>Holder(v)`) whose `isNull()` and object getters keep absent apart from zero. Array/list getters (`getStringList`, …) live on a **row**, not on the matrix.
+`rows()` is a **live view**: `rows().sort { }` reorders the matrix itself — pass
+`sort(false)`. A matrix from `callValue` is never the empty one, so check `size()` there.
 *(full API, addressing, collection idioms: `higson://docs/functions`)*
+
+**Function body — built-in objects:** besides `ctx` and `higson`, a function is handed
+`log` (slf4j, `{}` placeholders), `str`, `util`, `math`, `date`, `type` and `domain` —
+never declare or import them. Reach for them before hand-rolling a helper; null-safe
+versions of most string, date and comparison work already exist. What bites: `date.getMonth` is **one-based**, and a `date` field getter returns `0` when it
+cannot parse the input; `str.padLeft` **appends** and `padRight` **prepends** (they name the
+alignment, not the pad side); `str.format` uses slf4j `{}` anchors, not `%s`; `util.eq`
+compares two numeric-looking strings numerically, so `'10'` equals `'10.0'`;
+`calculateHaversineDistance` returns **meters**; `domain.get(path)` **throws** where
+`getSafe(path)` returns `null`, dynamic attributes need `ctx`, and a misspelled attribute
+code returns `null`/`0.0`/`false` silently; `domain` exists only when the domain cache is
+enabled; `type.paramValue()` needs `withTypes` as well as `withCodes`; and `util` is the
+Java helper object, **not** the `$u` Util Functions of Domain Configuration.
+The `_dec`/`_num`/`_int`/`_str`/`_bool`/`_date` converters are Groovy/JavaScript only —
+Python functions use `type.getDecimal(x)` and friends.
+**Function body — the context:** `ctx.set(path, value)` **throws when the path already
+exists** — use `ctx.with(path, value, true)` to overwrite. `ctx.has(key)` is a **flat** key
+check that does not walk sub-contexts, so it answers `false` for nested paths `get` resolves
+fine. Paths are case-insensitive (keys are lowercased). `ctx.getFirst(path)` reads the first
+element of a collection. Note the spelling: `ctx.getLocalDatetime` (lowercase `t`) versus
+`getLocalDateTime` on `higson` and `type`. Avoid `ctx.get(key, SomeClass)` — it casts
+without converting.
+*(full method lists: `higson://docs/functions`)*
 
 ## Deeper knowledge — read on demand from MCP resources
 
@@ -203,7 +229,7 @@ tool semantics, read the relevant one instead of guessing —
 | Context (input model) | `higson://docs/context` |
 | Domain (definition/config) | `higson://docs/domain` |
 | Decision tables (all matchers, flags, sorts, alias) | `higson://docs/decision-tables` |
-| Functions (Groovy API, matrix results, traps) | `higson://docs/functions` |
+| Functions (Groovy API, matrix results, built-in objects, traps) | `higson://docs/functions` |
 | Flows | `higson://docs/flows` |
 | Testing | `higson://docs/testing` |
 | Naming conventions | `higson://docs/naming-conventions` |
@@ -228,6 +254,16 @@ function body** — the decision-table result API is where invented methods cree
   NullPointerException surfaces somewhere else.
 - Reaching for `getNumber`/`getBoolean` on a nullable column → a missing rate prices as
   `0.0` instead of failing.
+- Declaring or importing `log`/`str`/`util`/`math`/`date`/`type`/`domain` in a function
+  body → they are already injected.
+- Treating `date.getMonth` as 0-based → it is 1-based; a `0` means the input could not be
+  parsed.
+- Treating `domain.get(path)` as null-safe → it throws; `getSafe(path)` is the
+  null-returning form.
+- Assuming a failed lookup returns an empty matrix → only on a table flagged nullable;
+  otherwise it throws `ParameterValueNotFoundException`.
+- Writing `higson.getLong(...)` or `ctx.set` over an existing path → neither exists / it
+  throws.
 - Dumping raw `list_*` on a large profile → overflow. Use `search`/filters.
 - Scanning, writing, or publishing without asking first.
 - Persisting environment knowledge to ad-hoc memory instead of `.higson/knowledge.md`.
