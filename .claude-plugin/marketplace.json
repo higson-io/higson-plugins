@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Higson plugins for Claude Code and Codex.",
-    "version": "1.1.0",
+    "version": "1.2.1",
     "homepage": "https://github.com/higson-io/higson-plugins"
   },
   "plugins": [
